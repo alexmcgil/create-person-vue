@@ -3,46 +3,50 @@
 
     <form @submit.prevent="submitHandler()" id="survey">
 
-      <span>*Поле обязательное для заполнения.</span>
+      <span class="description">*Поле обязательное для заполнения.</span>
 
       <div>
-        <label for="lastname">Фамилия*:</label>
+        <label for="lastname">Фамилия*</label>
         <input id="lastname"
                name="lastname"
                type="text"
-               placeholder="Фамилия"
+               placeholder="Иванов"
                v-model.trim="lastname"
                @blur="$v.lastname.$touch()"
         >
         <small
             class="helper-text"
             v-if="$v.lastname.$error"
-        >Фамилия клиента обязательно</small>
+        >Введите фамилию</small>
       </div>
 
       <div>
-        <label for="firstname">Имя*:</label>
+        <label for="firstname">Имя*</label>
         <input id="firstname"
                name="firstname"
                type="text"
-               placeholder="Имя"
+               placeholder="Иван"
                v-model.trim="firstname"
                @blur="$v.firstname.$touch()"
         >
         <small
             class="helper-text"
             v-if="$v.firstname.$error"
-        >Имя клиента обязательно</small>
+        >Введите имя</small>
       </div>
 
       <div>
-        <label for="patronymic">Отчество:</label>
-        <input id="patronymic" v-model="patronymic" name="patronymic" type="text" placeholder="Отчество">
+        <label for="patronymic">Отчество</label>
+        <input id="patronymic"
+               v-model="patronymic"
+               name="patronymic"
+               type="text"
+               placeholder="Иванович">
       </div>
 
 
       <div>
-        <label for="birthday">Дата рождения*:</label>
+        <label for="birthday">Дата рождения*</label>
         <input v-model="birthday"
                @blur="$v.birthday.$touch()"
                id="birthday"
@@ -52,33 +56,40 @@
         <small
             class="helper-text"
             v-if="$v.birthday.$error"
-        >Дата рождения клиента обязательна</small>
+        >Введите дату рождения</small>
       </div>
 
       <div>
-        <label for="phone">Номер телефона*:</label>
+        <label for="phone">Номер телефона*</label>
         <input v-model="phone"
                @blur="$v.phone.$touch()"
                id="phone"
-               type="number"
+               type="tel"
                name="phone"
                placeholder="7XXXXXXXXXX"
         >
-        <span
+        <small
             class="helper-text"
             v-if="$v.phone.$error"
-        >Номер телефона начинается с 7 и не может содержать больше или меньше 11 цифр
-</span>
+        >Номер телефона начинается с 7 и содержит 11 цифр
+        </small>
       </div>
 
-      <div>
+      <div class="gender">
         <p>Пол</p>
-        <label>
-          <input type="radio" v-model="gender" name="gender" value="female">Ж
-        </label>
-        <label>
-          <input type="radio" v-model="gender" name="gender" value="male">М
-        </label>
+        <label for="female">Ж</label>
+        <input type="radio"
+               id="female"
+               v-model="gender"
+               name="gender"
+               value="female">
+
+        <label for="male">М</label>
+        <input type="radio"
+               id="male"
+               v-model="gender"
+               name="gender"
+               value="male">
       </div>
 
       <div class="select_block">
@@ -86,23 +97,27 @@
         <select v-model="group"
                 @blur="$v.group.$touch()"
                 name="group" id="group" multiple size="3"
-                class="field_select"
-                style="@media (min-width: 768px) { height: calc(4 * 38px)}">
+                class="field_select">
+
           <option value="vip">VIP</option>
           <option value="troubles">Проблемные</option>
           <option value="oms">ОМС</option>
         </select>
-        <span
-            class="helper-text"
-            v-if="$v.group.$error"
-        >Группа клиента обязательна, выберите хотя бы одну
-        </span>
+
+        <small class="helper-text"
+               v-if="$v.group.$error">
+          Группа клиента обязательна, выберите хотя бы одну
+        </small>
+
         <span class="field_multiselect_help">Можно выбрать несколько зажав <b>Ctrl(или Command)</b></span>
       </div>
 
       <div class="select_block">
-        <p>Лечащий врач:</p>
-        <select class="field_select select" v-model="doctor" name="doctor" id="doctor"
+        <p>Лечащий врач</p>
+        <select class="field_select select"
+                v-model="doctor"
+                name="doctor"
+                id="doctor"
                 style="@media (min-width: 768px) { height: calc(4 * 38px)}">
           <option disabled selected value>-</option>
           <option value="ivanov">Иванов</option>
@@ -111,74 +126,110 @@
         </select>
       </div>
 
-      <div>
-        <label>
-          <input type="checkbox" v-model="noSms" name="nosms" value="nosms">Не отправлять СМС</label>
+      <div class="checkbox">
+        <label for="nosms">Не отправлять SMS</label>
+        <input type="checkbox"
+               id="nosms"
+               v-model="noSms"
+               value="nosms">
       </div>
 
       <div class="address">
         <p>Адресс клиента:</p>
         <label>
-          Индекс<input type="number" v-model="zip" name="zip">
+          Индекс<input type="number" v-model="zip" name="zip"
+                       placeholder="XXXXXX">
         </label>
         <label>
-          Страна<input type="text" v-model="country" name="country">
+          Страна<input type="text" v-model="country" name="country"
+                       placeholder="Россия">
         </label>
         <label>
-          Область<input type="text" v-model="region" name="region">
+          Область<input type="text" v-model="region" name="region"
+                        placeholder="Ленинградская область">
         </label>
         <label>
-          Город*<input type="text" v-model="city" @blur="$v.city.$touch()" name="city">
+          Город*<input type="text"
+                       v-model="city"
+                       @blur="$v.city.$touch()"
+                       name="city"
+                       placeholder="г. Санкт-Петербург">
         </label>
-        <span
+        <small
             class="helper-text"
             v-if="$v.city.$error"
         >Город клиента обязателен
-        </span>
+        </small>
         <label>
-          Улица<input type="text" v-model="street" name="street">
+          Улица<input type="text" v-model="street" name="street"
+                      placeholder="ул. Пушкина">
         </label>
         <label>
-          Дом<input type="text" v-model="house" name="house">
+          Дом<input type="text" v-model="house" name="house"
+                    placeholder="д. 8">
         </label>
       </div>
 
       <div class="documents">
         <p>Тип документа*</p>
-        <select v-model="type" @blur="$v.type.$touch()" class="field_select select" name="documents" id="documents"
+        <select v-model="type"
+                @blur="$v.type.$touch()"
+                class="field_select select"
+                name="documents" id="documents"
                 style="@media (min-width: 768px) { height: calc(4 * 38px)}">
           <option value="passport">Паспорт</option>
           <option value="birthCertificate">Свидетельство о рождении</option>
           <option value="driversLicense">Вод. удостоверение</option>
         </select>
-        <span
+        <small
             class="helper-text"
             v-if="$v.type.$error"
         >Тип документа клиента обязателен
-        </span>
-        <label>
-          Серия<input type="number" v-model="serial" name="serial">
+        </small>
+        <label>Серия
+          <input type="number"
+                 v-model="serial"
+                 name="serial"
+                 placeholder="XX XX">
         </label>
-        <label>
-          Номер<input type="number" v-model="number" name="number">
+        <label>Номер
+          <input type="number"
+                 v-model="number"
+                 name="number"
+                 placeholder="XXXXXX">
         </label>
-        <label>
-          Кем выдан<input type="text" v-model="issued" name="issued">
+        <label>Кем выдан
+          <input type="text"
+                 v-model="issued"
+                 name="issued"
+                 placeholder="Наименование учреждения">
         </label>
-        <label>
-          Дата выдачи*<input v-model="passportDate" @blur="$v.passportDate.$touch()" type="date" name="passportDate">
+        <label>Дата выдачи*
+          <input v-model="passportDate"
+                 @blur="$v.passportDate.$touch()"
+                 type="date"
+                 name="passportDate">
         </label>
-        <span
-            class="helper-text"
-            v-if="$v.passportDate.$error"
-        >Дата выдачи документа клиента обязателен
-        </span>
+        <small class="helper-text"
+               v-if="$v.passportDate.$error">
+          Дата выдачи документа клиента обязателна
+        </small>
       </div>
 
-      <button type="submit" class="submit"  >добавить клиента</button>
+      <button type="submit" class="submit">добавить клиента</button>
 
     </form>
+    <transition name="fade">
+        <div class="congratulations" v-if="readyShow">
+      <div class="header"> Клиент успешно добавлен.</div>
+      <div class="question">Изменить данные?</div>
+      <button class="notsure" @click="closeWindow">Внести изменения</button>
+      <button class="sure" @click="reloadPage">Нет, всё верно</button>
+    </div>
+    </transition>
   </div>
+
+
 </template>
 
 <script>
@@ -207,7 +258,8 @@ export default {
       serial: null,
       number: null,
       issued: null,
-      passportDate: null
+      passportDate: null,
+      readyShow: false,
     }
   },
   validations: {
@@ -225,7 +277,7 @@ export default {
   },
   methods: {
     submitHandler() {
-        this.$v.$touch()
+      this.$v.$touch()
 
       if (this.$v.$invalid) {
         return
@@ -251,69 +303,15 @@ export default {
         region: this.region,
         passportDate: this.passportDate,
       }
-      console.log(formData)
+      this.readyShow = true
     },
 
+    reloadPage() {
+      window.location.reload()
+    },
+    closeWindow() {
+      this.readyShow = false
+    }
   }
 }
 </script>
-
-<style lang="sass">
-input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
-  -webkit-appearance: none
-  margin: 0
-
-input[type="number"]
-  -moz-appearance: textfield
-
-.field_select
-  display: block
-  margin: auto
-  border: 2px solid #cdd6f3
-  border-bottom-right-radius: 2px
-  border-bottom-left-radius: 2px
-  outline-color: #cdd6f3
-
-.field_select[multiple]
-  overflow-y: auto
-
-.field_select option
-  padding: 8px 16px
-  width: 338px
-  cursor: pointer
-
-.field_select option:checked
-  background-color: #eceff3
-
-.field_select option:hover
-  background-color: #d5e8fb
-
-.field_multiselect
-  padding-right: 60px
-
-input:focus
-  box-shadow: 0 0 2px rgba(0, 0, 0, 0.16)
-
-.select
-  min-width: 370px
-  height: 32px
-  background-color: #d5e8fb
-
-.select option
-  padding: 8px 16px
-  width: 370px
-  cursor: pointer
-  height: 32px
-  background-color: #eceff3
-
-.select option:checked
-  background-color: #d5e8fb
-
-.address label
-  display: block
-
-.documents label
-  display: block
-
-
-</style>
