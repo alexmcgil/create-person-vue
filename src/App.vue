@@ -1,14 +1,14 @@
 <template>
   <div id="app">
-    <div class="header">
-      <h1>Добавление нового клиента</h1>
-    </div>
+    <header class="header">
+      <h1 class="header__info">Добавление нового клиента</h1>
+    </header>
     <Survey/>
   </div>
 </template>
 
 <script>
-import Survey from '@/components/Survey.vue'
+import Survey from '@/components/Form.vue'
 
 export default {
   name: 'App',

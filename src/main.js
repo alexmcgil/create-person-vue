@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import Vuelidate from "vuelidate"
-import "./Survey.sass"
+import "./components/Form.sass"
 import "./App.sass"
 
 Vue.config.productionTip = false

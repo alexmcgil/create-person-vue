@@ -1,26 +1,28 @@
-form
+*
+  margin: 0
+  padding: 0
+
+.form
   border-radius: 10px
   background: #FFFFFFFF
   margin-top: 20px
-  padding: 30px 40px
+  padding: 5px 3%
   text-align: left
 
-.description
+.form__description
   display: block
-  margin-bottom: 5px
+  margin: 5px 0
   text-align: right
   color: #808080FF
   font-size: 12px
   font-style: italic
 
-form div input
-  display: block
-  margin: 0 100% 4px 0
-  width: 100%
-
-form div
+fieldset
   font-style: italic
   font-size: 14px
+  width: 100%
+  margin: 10px 0 0
+  border: none
 
 input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button
   -webkit-appearance: none
@@ -30,19 +32,20 @@ input[type="number"]
 
 .field_select
   display: block
-  margin: auto
-  border: 2px solid #5F9EA0FF
-  border-bottom-right-radius: 2px
-  border-bottom-left-radius: 2px
+  border: solid #5F9EA0FF
+  border-radius: 4px
   outline-color: #5F9EA0FF
   width: 100%
+
+.field_select[multiple]::-webkit-scrollbar
+  width: 0
 
 .field_select[multiple]
   overflow-y: auto
 
 .field_select option
   padding: 8px 16px
-  width: 22rem
+  width: 100%
   cursor: pointer
 
 .field_select option:checked
@@ -51,16 +54,15 @@ input[type="number"]
 .field_select option:hover
   background-color: #d5e8fb
 
-.field_multiselect_help
+.field__multiselect_help
   text-align: right
   font-size: 12px
-  margin-left: 80px
 
 input:focus
   box-shadow: 0 0 2px rgba(0, 0, 0, 0.16)
 
 .select
-  min-width: 100%
+  width: 100%
   height: 32px
   background-color: #d5e8fb
 
@@ -81,22 +83,22 @@ input:focus
   display: block
 
 input
-  margin: 5px auto
+  display: block
   border: solid #5F9EA0FF
   border-radius: 4px
   height: 25px
   font-size: 16px
+  width: 43vw
   padding-left: 10px
 
-input::placeholder
-  font-style: italic
-
-.helper-text
+.form__fieldset_helper-text
   color: #f35454
 
 .submit
+  margin: 40px 0 20px
+
+.submit_button
   width: 100%
-  margin-top: 10px
   height: 40px
   font-size: 20px
   background: #8cb7c2
@@ -105,6 +107,8 @@ input::placeholder
   text-transform: uppercase
   font-weight: bold
   color: #FFF
+  margin: 0 auto
+  cursor: pointer
 
 .congratulations
   position: fixed
@@ -119,10 +123,6 @@ input::placeholder
   opacity: 0.95
   border-radius: 10px
 
-.header
-  display: block
-  margin: 10px auto
-
 .question
   display: block
   margin-top: 50px
@@ -132,17 +132,15 @@ input::placeholder
   border-radius: 5px
   border-color: #7FFFD4FF
   height: 2.4rem
-  //width: 40%
   margin: 0 5px
-  //font-size: 12px
   font-weight: bold
 
-.notsure
-  background: #6495EDFF
+.not-sure
+  background: #9a0101
   color: #FFF
 
 .sure
-  background: #2e8b2e
+  background: #4dca4d
   color: #FFF
 
 .checkbox input
@@ -152,20 +150,15 @@ input::placeholder
   height: 15px
 
 .checkbox
-  margin: 15px 0
   font-style: normal
 
-.gender input
+.form__gender input
   display: inline
   width: 15px
   margin: 4px 15px 0 15px
   height: 14px
 
-.gender
-  margin: 20px 0
-  font-style: normal
-
-.gender p
+.form__gender p
   margin-bottom: 4px
 
 @media screen and (min-width: 400px)
